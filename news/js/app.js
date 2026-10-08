@@ -197,7 +197,7 @@
                 clearTimeout(timer);
                 if (!box.isConnected) return stop();
                 try {
-                    const res = await fetch("/api/leaderboard", { cache: "no-cache" });
+                    const res = await fetch("https://red-frog-66d2.justaoproandiradfigus.workers.dev/api/leaderboard", { cache: "no-cache" });
                     if (!res.ok) throw new Error(res.status);
                     render(await res.json());
                 } catch {
