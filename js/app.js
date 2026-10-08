@@ -317,9 +317,12 @@
                 const mine = document.head.querySelector(sel), theirs = doc.head.querySelector(sel);
                 if (mine && theirs) mine.replaceWith(theirs.cloneNode());
             }
-            const current = doc.querySelector('.nav-links [aria-current="page"]')?.getAttribute("href");
-            nav.querySelectorAll(".nav-links a").forEach(a => {
-                if (a.getAttribute("href") === current) a.setAttribute("aria-current", "page");
+            const pageLinks = [...doc.querySelectorAll(".nav-links a")];
+            nav.querySelectorAll(".nav-links a").forEach((a, i) => {
+                const pageLink = pageLinks[i];
+                if (!pageLink) return;
+                a.setAttribute("href", pageLink.getAttribute("href"));
+                if (pageLink.hasAttribute("aria-current")) a.setAttribute("aria-current", "page");
                 else a.removeAttribute("aria-current");
             });
             setMenu(false);
